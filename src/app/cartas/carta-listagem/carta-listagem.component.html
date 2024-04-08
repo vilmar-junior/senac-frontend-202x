@@ -1,0 +1,28 @@
+<div class="container">
+    <h1 class="alert alert-success">Cartas disponíveis para X1: </h1>
+    <div>
+        <table class="table table-striped border border-success">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Força</th>
+                    <th>Velocidade</th>
+                    <th>Inteligência</th>
+                    <th>Cadastrada em:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr scope="row" *ngFor="let carta of cartas">
+                    <td>{{carta.nome}}</td>
+                    <td>{{carta.forca}}</td>
+                    <td>{{carta.velocidade}}</td>
+                    <td>{{carta.inteligencia}}</td>
+                    <td>{{carta.dataCadastro | date: 'dd/MM/yyyy'}}</td>
+                </tr>
+        </table>
+    </div>
+</div>
+
+
+
+
