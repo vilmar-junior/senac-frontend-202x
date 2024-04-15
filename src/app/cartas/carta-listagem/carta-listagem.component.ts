@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Carta } from 'src/app/shared/model/carta';
+import { CartaSeletor } from 'src/app/shared/model/seletor/carta.seletor';
 import { CartasService } from 'src/app/shared/service/cartas.service';
 
 @Component({
@@ -10,11 +11,27 @@ import { CartasService } from 'src/app/shared/service/cartas.service';
 export class CartaListagemComponent implements OnInit {
 
   public cartas: Carta[] = [];
+  public seletor: CartaSeletor = new CartaSeletor();
 
   constructor(private cartaService: CartasService) { }
 
   ngOnInit(): void {
     this.consultarTodasCartas();
+  }
+
+  public pesquisar() {
+    this.cartaService.listarComSeletor(this.seletor).subscribe(
+      resultado => {
+        this.cartas = resultado;
+      },
+      erro => {
+        console.error('Erro ao consultar cartas', erro);
+      }
+    );
+  }
+
+  public limpar() {
+    this.seletor = new CartaSeletor();
   }
 
   private consultarTodasCartas() {
