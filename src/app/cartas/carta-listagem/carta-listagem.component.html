@@ -1,6 +1,5 @@
 <div class="container">
     <h3 class="alert alert-success">Cartas disponíveis para X1: </h3>
-    <!-- <pre>{{seletor | json}}</pre> -->
     <div class="card">
         <div class="card-header bg-info">
             <h5>Filtros</h5>
@@ -16,23 +15,23 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3">
-                        <label for="nome">Força mínima:</label>
-                        <input type="number" class="form-control" name="forcaMinima" 
+                        <label for="forcaMinima">Força mínima:</label>
+                        <input type="number" id="forcaMinima" class="form-control" name="forcaMinima" 
                                [(ngModel)]="seletor.forcaMinima">
                     </div>
                     <div class="col-md-3">
-                        <label for="nome">Velocidade mínima:</label>
-                        <input type="number" class="form-control" name="velocidadeMinima" 
+                        <label for="forcaMinima">Velocidade mínima:</label>
+                        <input type="number" id="velocidadeMinima" class="form-control" name="velocidadeMinima" 
                                [(ngModel)]="seletor.velocidadeMinima">
                     </div>
                     <div class="col-md-3">
-                        <label for="nome">Inteligência mínima:</label>
-                        <input type="number" class="form-control" name="inteligenciaMinima" 
+                        <label for="inteligenciaMinima">Inteligência mínima:</label>
+                        <input type="number" id="inteligenciaMinima" class="form-control" name="inteligenciaMinima" 
                                [(ngModel)]="seletor.inteligenciaMinima">
                     </div>
                     <div class="col-md-3">
-                        <label for="nome">&nbsp;</label>
-                        <button type="button" class="form-control btn btn-warning"
+                        <label for="btnLimpar">&nbsp;</label>
+                        <button type="button" class="form-control btn btn-warning" name="btnLimpar"
                                 (click)="limpar()">
                             <i class="bi bi-trash"></i> Limpar
                         </button>
@@ -40,23 +39,23 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3">
-                        <label for="nome">Força máxima:</label>
+                        <label for="forcaMaxima">Força máxima:</label>
                         <input type="number" class="form-control" name="forcaMaxima" 
                                [(ngModel)]="seletor.forcaMaxima">
                     </div>
                     <div class="col-md-3">
-                        <label for="nome">Velocidade máxima:</label>
+                        <label for="velocidadeMaxima">Velocidade máxima:</label>
                         <input type="number" class="form-control" name="velocidadeMaxima" 
                                [(ngModel)]="seletor.velocidadeMaxima">
                     </div>
                     <div class="col-md-3">
-                        <label for="nome">Inteligência máxima:</label>
+                        <label for="inteligenciaMaxima">Inteligência máxima:</label>
                         <input type="number" class="form-control" name="inteligenciaMaxima" 
                                [(ngModel)]="seletor.inteligenciaMaxima">
                     </div>
                     <div class="col-md-3">
-                        <label for="nome">&nbsp;</label>
-                        <button type="button" class="form-control btn btn-primary"
+                        <label for="btnPesquisar">&nbsp;</label>
+                        <button type="button" class="form-control btn btn-primary" name="btnPesquisar"
                                 (click)="pesquisar()">
                             <i class="bi bi-search"></i>Pesquisar
                         </button>
@@ -88,3 +87,7 @@
         </table>
     </div>
 </div>
+
+
+
+
