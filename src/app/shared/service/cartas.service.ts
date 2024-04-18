@@ -19,14 +19,13 @@ export class CartasService {
   }
 
   listarComSeletor(seletor: CartaSeletor): Observable<Array<Carta>> {
-    //TODO desenvolver no backend o respectivo método 
-    //(em CartaController.java) para atender a esta chamada
     return this.httpClient.post<Array<Carta>>(this.API + '/filtrar', seletor);
   }
 
+  excluir(id: number): Observable<any> {
+    return this.httpClient.delete(this.API + '/' + id);
+  }
 
-
-  //TODO declarar os demais métodos disponibilizados pelo CartaController no backend
 }
 
 

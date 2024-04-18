@@ -34,6 +34,19 @@ export class CartaListagemComponent implements OnInit {
     this.seletor = new CartaSeletor();
   }
 
+  excluir(cartaSelecionada: Carta){
+    //TODO pedir confirmação do usuário antes de excluir
+    this.cartaService.excluir(cartaSelecionada.id).subscribe(
+      resultado => {
+        this.pesquisar();
+      },
+      erro => {
+        //TODO tratar a mensagem de erro
+        console.error('Erro ao excluir carta', erro);
+      }
+    );
+  }
+
   private consultarTodasCartas() {
     this.cartaService.listarTodas().subscribe(
       resultado => {

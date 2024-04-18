@@ -74,6 +74,7 @@
                     <th>Velocidade</th>
                     <th>Inteligência</th>
                     <th>Cadastrada em:</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -83,6 +84,15 @@
                     <td>{{carta.velocidade}}</td>
                     <td>{{carta.inteligencia}}</td>
                     <td>{{carta.dataCadastro | date: 'dd/MM/yyyy'}}</td>
+                    <td class="text-center">
+                        <button class="btn btn-xs btn-secondary mr-12"
+                                >Editar
+                        </button>
+                        &nbsp;
+                        <button class="btn btn-xs btn-danger"
+                                (click)="excluir(carta)">Excluir
+                        </button>
+                      </td>
                 </tr>
         </table>
     </div>
