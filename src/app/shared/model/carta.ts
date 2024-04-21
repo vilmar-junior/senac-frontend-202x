@@ -1,5 +1,4 @@
-export interface Carta{
-    //Este código foi removido de CartaListagemComponent e colocado aqui
+export class Carta{
     id: number;
     nome: string;
     forca: number;

@@ -8,24 +8,29 @@ import { CartaSeletor } from '../model/seletor/carta.seletor';
   providedIn: 'root'
 })
 export class CartasService {
-
-  //URL base da API de cartas
   private readonly API = 'http://localhost:8080/senac-20241-backend-exemplos/rest/carta';
   
   constructor(private httpClient: HttpClient) { }
- 
-  listarTodas(): Observable<Array<Carta>> {
-    return this.httpClient.get<Array<Carta>>(this.API + '/todas');
+
+  salvar(carta: Carta): Observable<any> {
+    return this.httpClient.post(this.API, carta);
   }
 
-  listarComSeletor(seletor: CartaSeletor): Observable<Array<Carta>> {
-    return this.httpClient.post<Array<Carta>>(this.API + '/filtrar', seletor);
+  atualizar(carta: Carta): Observable<any> {
+    return this.httpClient.put(this.API, carta);
   }
 
   excluir(id: number): Observable<any> {
     return this.httpClient.delete(this.API + '/' + id);
   }
 
+  listarComSeletor(seletor: CartaSeletor): Observable<Array<Carta>> {
+    return this.httpClient.post<Array<Carta>>(this.API + '/filtrar', seletor);
+  }
+ 
+  listarTodas(): Observable<Array<Carta>> {
+    return this.httpClient.get<Array<Carta>>(this.API + '/todas');
+  }
 }
 
 
