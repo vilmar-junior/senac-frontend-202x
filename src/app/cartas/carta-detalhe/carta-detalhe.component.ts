@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartasService } from 'src/app/shared/service/cartas.service';
 import { Carta } from './../../shared/model/carta';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,24 +12,61 @@ import Swal from 'sweetalert2';
 export class CartaDetalheComponent implements OnInit {
 
   public carta: Carta = new Carta();
+  public idCarta: number;
 
   constructor(private cartaService: CartasService,
-              private router: Router //componente para o roteamento entre telas
+              private router: Router, //componente para o roteamento entre telas
+              private route: ActivatedRoute //para pegar os parâmetros da URL
   ) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      this.idCarta = params['id'];
+      if(this.idCarta) {
+        this.buscarCarta();
+      }
+    });
+  }
+
+  buscarCarta(): void {
+    this.cartaService.consultar(this.idCarta).subscribe(
+      (carta) => {
+        this.carta = carta;
+      },
+      (erro) => {
+        Swal.fire('Erro ao buscar a carta!', erro, 'error');
+      }
+    );
   }
 
   salvar(): void {
-    //TODO e na EDIÇÃO? Vamos alterar em breve
+    if(this.idCarta){
+      this.atualizar();
+    }else{
+      this.inserir();
+    }
+  }
+
+  inserir(): void {
     this.cartaService.salvar(this.carta).subscribe(
       (resposta) => {
         Swal.fire('Carta salva com sucesso!', '', 'success');
         this.voltar();
       },
       (erro) => {
-        //TODO vamos lidar logo logo com o erro devolvido pela API
-        Swal.fire('Erro ao salvar a carta!', erro, 'error');
+        Swal.fire('Erro ao salvar a carta: ' + erro.error.mensagem, 'error');
+      }
+    );
+  }
+
+  atualizar(): void {
+    this.cartaService.atualizar(this.carta).subscribe(
+      (resposta) => {
+        Swal.fire('Carta atualizada  com sucesso!', '', 'success');
+        this.voltar();
+      },
+      (erro) => {
+        Swal.fire('Erro ao atualizar a carta: ' + erro.error.mensagem, 'error');
       }
     );
   }

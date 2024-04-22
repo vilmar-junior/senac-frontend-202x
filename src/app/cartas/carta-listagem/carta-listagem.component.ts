@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Carta } from 'src/app/shared/model/carta';
 import { CartaSeletor } from 'src/app/shared/model/seletor/carta.seletor';
 import { CartasService } from 'src/app/shared/service/cartas.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-carta-listagem',
@@ -13,7 +15,9 @@ export class CartaListagemComponent implements OnInit {
   public cartas: Carta[] = [];
   public seletor: CartaSeletor = new CartaSeletor();
 
-  constructor(private cartaService: CartasService) { }
+  constructor(private cartaService: CartasService,
+              private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.consultarTodasCartas();
@@ -35,16 +39,29 @@ export class CartaListagemComponent implements OnInit {
   }
 
   excluir(cartaSelecionada: Carta){
-    //TODO pedir confirmação do usuário antes de excluir
-    this.cartaService.excluir(cartaSelecionada.id).subscribe(
-      resultado => {
-        this.pesquisar();
-      },
-      erro => {
-        //TODO tratar a mensagem de erro
-        console.error('Erro ao excluir carta', erro);
+    Swal.fire({
+      title: 'Deseja realmente excluir a carta?',
+      text: 'Essa ação não poderá ser desfeita!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, excluir!',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        this.cartaService.excluir(cartaSelecionada.id).subscribe(
+          resultado => {
+            this.pesquisar();
+          },
+          erro => {
+            Swal.fire('Erro!', 'Erro ao excluir carta: ' + erro.error.mensagem, 'error');
+          }
+        );
       }
-    );
+    });
+  }
+
+  editar(idCartaSelecionada: number){
+    this.router.navigate(['/cartas/detalhe/', idCartaSelecionada]);
   }
 
   private consultarTodasCartas() {

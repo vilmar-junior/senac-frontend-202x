@@ -70,33 +70,37 @@
             <thead>
                 <tr>
                     <th>Nome</th>
-                    <th>Força</th>
-                    <th>Velocidade</th>
-                    <th>Inteligência</th>
-                    <th>Cadastrada em:</th>
-                    <th>Ações</th>
+                    <th class="text-center">Força</th>
+                    <th class="text-center">Velocidade</th>
+                    <th class="text-center">Inteligência</th>
+                    <th class="text-center">Cadastrada em:</th>
+                    <th class="text-center">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <tr scope="row" *ngFor="let carta of cartas">
                     <td>{{carta.nome}}</td>
-                    <td>{{carta.forca}}</td>
-                    <td>{{carta.velocidade}}</td>
-                    <td>{{carta.inteligencia}}</td>
-                    <td>{{carta.dataCadastro | date: 'dd/MM/yyyy'}}</td>
+                    <td class="text-center">{{carta.forca}}</td>
+                    <td class="text-center">{{carta.velocidade}}</td>
+                    <td class="text-center">{{carta.inteligencia}}</td>
+                    <td class="text-center">{{carta.dataCadastro | date: 'dd/MM/yyyy'}}</td>
                     <td class="text-center">
-                        <button class="btn btn-xs btn-secondary mr-12"
-                                >Editar
+                        <button class="btn btn-xs btn-info mr-12"
+                                (click)="editar(carta.id)">
+                            <i class="bi bi-pencil"></i> Editar
                         </button>
                         &nbsp;
                         <button class="btn btn-xs btn-danger"
-                                (click)="excluir(carta)">Excluir
+                                (click)="excluir(carta)">
+                            <i class="bi bi-x"></i> Excluir
                         </button>
                       </td>
                 </tr>
+            </tbody>
         </table>
     </div>
 </div>
+
 
 
 

@@ -24,6 +24,10 @@ export class CartasService {
     return this.httpClient.delete(this.API + '/' + id);
   }
 
+  consultar(id: number): Observable<Carta> {
+    return this.httpClient.get<Carta>(this.API + '/' + id);
+  }
+
   listarComSeletor(seletor: CartaSeletor): Observable<Array<Carta>> {
     return this.httpClient.post<Array<Carta>>(this.API + '/filtrar', seletor);
   }
