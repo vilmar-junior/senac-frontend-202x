@@ -1,4 +1,6 @@
-export class CartaSeletor {
+import { BaseSeletor } from "./base.seletor";
+
+export class CartaSeletor extends BaseSeletor {
     nome: string;
     forcaMinima: number;
     forcaMaxima: number;

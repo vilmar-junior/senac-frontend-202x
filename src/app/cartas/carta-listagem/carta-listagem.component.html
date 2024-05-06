@@ -65,6 +65,31 @@
         </div>
     </div>
     <br><br>
+
+    
+    <nav class="row">
+        <div class="col-md-3">
+            <!-- Componente de quantidade de registros por página -->
+            <label for="quantidadeRegistros">Quantidade de registros por página:</label>
+            <select class="form-select" [(ngModel)]="seletor.limite" (change)="atualizarPaginacao()">
+                <option value="3">3</option>
+                <option value="6">6</option>
+                <option value="20">20</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="quantidadeRegistros">&nbsp;</label>
+            <!-- Componente de paginação -->
+            <ul class="pagination">
+                <li class="page-item"><button [disabled]="seletor.pagina == 1" class="page-link" (click)="voltarPagina()">Anterior</button></li>
+                
+                <!-- Botões com as páginas construídos dinamicamente -->
+                <li class="page-item" *ngFor="let indice of criarArrayPaginas()" (click)="irParaPagina(indice)"><button class="page-link">{{indice}}</button></li>
+                
+                <li class="page-item"><button [disabled]="seletor.pagina == totalPaginas" class="page-link" (click)="avancarPagina()">Próxima</button></li>
+            </ul>
+        </div>   
+    </nav>
     <div>
         <table class="table table-striped border">
             <thead>

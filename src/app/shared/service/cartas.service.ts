@@ -31,6 +31,14 @@ export class CartasService {
   listarComSeletor(seletor: CartaSeletor): Observable<Array<Carta>> {
     return this.httpClient.post<Array<Carta>>(this.API + '/filtrar', seletor);
   }
+
+  contarTotalRegistros(seletor: CartaSeletor): Observable<number> {
+    return this.httpClient.post<number>(this.API + '/contar', seletor);
+  }
+
+  contarPaginas(seletor: CartaSeletor): Observable<number> {
+    return this.httpClient.post<number>(this.API + '/total-paginas', seletor);
+  }
  
   listarTodas(): Observable<Array<Carta>> {
     return this.httpClient.get<Array<Carta>>(this.API + '/todas');
