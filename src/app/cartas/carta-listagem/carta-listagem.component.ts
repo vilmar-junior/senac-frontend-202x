@@ -24,6 +24,7 @@ export class CartaListagemComponent implements OnInit {
   ngOnInit(): void {
     this.seletor.limite = this.TAMANHO_PAGINA;
     this.seletor.pagina = 1;
+
     this.pesquisar();
     this.contarPaginas();
   }

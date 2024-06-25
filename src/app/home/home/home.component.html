@@ -3,13 +3,16 @@
         <a class="navbar-brand" href="#">Vem no X1</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/jogar">Jogar</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" 
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Cartas
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/cartas/detalhe">Cadastro</a></li>
+                        <li><a class="dropdown-item" href="home/cartas/detalhe">Cadastro</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="/cartas">Listagem</a></li>
                     </ul>
@@ -26,10 +29,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/jogar">Jogar</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Sobre</a>
+                    <a class="nav-link" (click)="logout()">Sair</a>
                 </li>
             </ul>
         </div>
@@ -39,3 +39,5 @@
 <div *ngIf="jogadorAutenticado">
     Olá, {{jogadorAutenticado?.nome}}
 </div>
+
+<router-outlet></router-outlet>

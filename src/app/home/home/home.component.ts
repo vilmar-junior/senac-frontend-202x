@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Jogador } from './../../shared/model/jogador';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,15 +10,20 @@ import { Jogador } from './../../shared/model/jogador';
 export class HomeComponent implements OnInit {
 
   public jogadorAutenticado: Jogador;
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
-
     let usuarioNoStorage = localStorage.getItem('usuarioAutenticado');
 
     if(usuarioNoStorage){
       this.jogadorAutenticado = JSON.parse(usuarioNoStorage);
+    } else {
+      this.router.navigate(['/login']);
     }
   }
 
+  logout(){
+    localStorage.removeItem('usuarioAutenticado');
+    this.router.navigate(['/login']);
+  }
 }
