@@ -24,10 +24,9 @@ export class LoginComponent  {
       (usuarioAutenticado: Jogador) => {
         Swal.fire('Sucesso', 'Usuário autenticado com sucesso', 'success');
         localStorage.setItem('usuarioAutenticado', JSON.stringify(usuarioAutenticado));
-        this.router.navigate(['/home'])
+        this.router.navigate(['/home']);
       },
       (erro) => {
-        //TODO testar
         Swal.fire('Erro', erro.error.mensagem, 'error');
       }
     )
@@ -35,6 +34,6 @@ export class LoginComponent  {
   
   public cadastro() {
     //TODO desenvolver
-    this.router.navigate(['login/cadastro'])
+    this.router.navigate(['login/cadastro']);
   }
 }

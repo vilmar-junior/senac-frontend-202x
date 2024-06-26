@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   public jogadorAutenticado: Jogador;
+  public ehAdministrador: boolean = false;
+
   constructor(private router: Router) { }
 
   ngOnInit(): void {
@@ -17,6 +19,7 @@ export class HomeComponent implements OnInit {
 
     if(usuarioNoStorage){
       this.jogadorAutenticado = JSON.parse(usuarioNoStorage);
+      this.ehAdministrador = this.jogadorAutenticado?.perfil == 'ADMINISTRADOR';
     } else {
       this.router.navigate(['/login']);
     }
@@ -27,3 +30,8 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 }
+
+
+
+
+

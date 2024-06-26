@@ -6,9 +6,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/jogar">Jogar</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" 
-                        data-bs-toggle="dropdown" aria-expanded="false">
+                <li class="nav-item">
+                    <a class="nav-link" href="/home">Meu histórico</a>
+                </li>
+                <li class="nav-item dropdown" *ngIf="ehAdministrador">
+                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
                         Cartas
                     </a>
                     <ul class="dropdown-menu">
@@ -17,9 +20,9 @@
                         <li><a class="dropdown-item" href="/cartas">Listagem</a></li>
                     </ul>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown"  *ngIf="ehAdministrador">
                     <a class="nav-link dropdown-toggle" href="#" role="button" 
-                        data-bs-toggle="dropdown" aria-expanded="false">
+                       data-bs-toggle="dropdown" aria-expanded="false">
                         Jogadores
                     </a>
                     <ul class="dropdown-menu">
@@ -38,6 +41,20 @@
 
 <div *ngIf="jogadorAutenticado">
     Olá, {{jogadorAutenticado?.nome}}
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title>">{{jogadorAutenticado.nome}} ({{jogadorAutenticado.email}})</h5>
+                        <p class="card-text">Meu score:  {{jogadorAutenticado.percentualVitorias}}%</p>
+                        <p class="card-text">Total de partidas: {{jogadorAutenticado.totalPartidas}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <router-outlet></router-outlet>
