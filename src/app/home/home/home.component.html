@@ -39,7 +39,7 @@
     </div>
 </nav>
 
-<div *ngIf="jogadorAutenticado">
+<div *ngIf="jogadorAutenticado && !ehAdministrador">
     Olá, {{jogadorAutenticado?.nome}}
 
     <div class="container">

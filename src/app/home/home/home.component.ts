@@ -20,6 +20,11 @@ export class HomeComponent implements OnInit {
     if(usuarioNoStorage){
       this.jogadorAutenticado = JSON.parse(usuarioNoStorage);
       this.ehAdministrador = this.jogadorAutenticado?.perfil == 'ADMINISTRADOR';
+
+      if(this.ehAdministrador){
+        this.router.navigate(['/home/cartas']);
+      
+      }
     } else {
       this.router.navigate(['/login']);
     }
