@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">    
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Vem no X1</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/jogar">Jogar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/home">Meu histórico</a>
+                </li>
+                <li class="nav-item dropdown" *ngIf="ehAdministrador">
+                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Cartas
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="home/cartas/detalhe">Cadastro</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/cartas">Listagem</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown"  *ngIf="ehAdministrador">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" 
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Jogadores
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/jogador/detalhe">Cadastro</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/jogador">Listagem</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="logout()">Sair</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div *ngIf="jogadorAutenticado && !ehAdministrador">
+    Olá, {{jogadorAutenticado?.nome}}
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title>">{{jogadorAutenticado.nome}} ({{jogadorAutenticado.email}})</h5>
+                        <p class="card-text">Meu score:  {{jogadorAutenticado.percentualVitorias}}%</p>
+                        <p class="card-text">Total de partidas: {{jogadorAutenticado.totalPartidas}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<router-outlet></router-outlet>
