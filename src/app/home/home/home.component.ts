@@ -15,19 +15,21 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    let usuarioNoStorage = localStorage.getItem('usuarioAutenticado');
+    //TODO ajustar
+    //let usuarioNoStorage = localStorage.getItem('usuarioAutenticado');
 
-    if(usuarioNoStorage){
-      this.jogadorAutenticado = JSON.parse(usuarioNoStorage);
-      this.ehAdministrador = this.jogadorAutenticado?.perfil == 'ADMINISTRADOR';
+    // if(usuarioNoStorage){
+    //   //this.jogadorAutenticado = JSON.parse(usuarioNoStorage);
+    //   this.ehAdministrador = this.jogadorAutenticado?.perfil == 'ADMINISTRADOR';
 
-      if(this.ehAdministrador){
-        this.router.navigate(['/home/cartas']);
+    //   if(this.ehAdministrador){
+    //     this.router.navigate(['/home/cartas']);
       
-      }
-    } else {
+    //   }
+    // } else {
+      console.log("TESTE");
       this.router.navigate(['/login']);
-    }
+    // }
   }
 
   logout(){

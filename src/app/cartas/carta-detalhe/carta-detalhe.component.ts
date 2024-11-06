@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 export class CartaDetalheComponent implements OnInit {
 
   public carta: Carta = new Carta();
+  public selectedFile: File | null = null;
   public idCarta: number;
 
   constructor(private cartaService: CartasService,
@@ -28,6 +29,17 @@ export class CartaDetalheComponent implements OnInit {
     });
   }
 
+  // Capturar o arquivo selecionado
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file && file.size <= 10 * 1024 * 1024) { // Limite de 10MB
+      this.selectedFile = file;
+    } else {
+      alert('Tamanho de arquivo não permitido! Máximo: 10MB.');
+      this.selectedFile = null;
+    }
+  }
+
   buscarCarta(): void {
     this.cartaService.consultar(this.idCarta).subscribe(
       (carta) => {
@@ -39,7 +51,9 @@ export class CartaDetalheComponent implements OnInit {
     );
   }
 
-  salvar(): void {
+  salvar(event: Event): void {
+    event.preventDefault();
+    
     if(this.idCarta){
       this.atualizar();
     }else{

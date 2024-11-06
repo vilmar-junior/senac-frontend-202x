@@ -8,9 +8,11 @@ import { CartaSeletor } from '../model/seletor/carta.seletor';
   providedIn: 'root'
 })
 export class CartasService {
-  private readonly API = 'http://localhost:8080/senac-20241-backend-exemplos/rest/restrito/carta';
+  private readonly API = 'http://localhost:8080/vemnox1/api/carta';
   
   constructor(private httpClient: HttpClient) { }
+
+  
 
   salvar(carta: Carta): Observable<any> {
     return this.httpClient.post(this.API, carta);

@@ -15,19 +15,27 @@ export class LoginComponent  {
 
   public dto: UsuarioDTO = new UsuarioDTO();
 
-  constructor(private LoginService: LoginService,
+  constructor(private loginService: LoginService,
               private router: Router) {
   }
 
   public realizarLogin() {
-    this.LoginService.autenticar(this.dto).subscribe(
-      (usuarioAutenticado: Jogador) => {
-        Swal.fire('Sucesso', 'UsuÃ¡rio autenticado com sucesso', 'success');
-        localStorage.setItem('usuarioAutenticado', JSON.stringify(usuarioAutenticado));
+    this.loginService.autenticar(this.dto)
+    .subscribe(
+      (token: any) => {
+        Swal.fire('Sucesso', 'Usuário autenticado com sucesso', 'success');
         this.router.navigate(['/home']);
       },
       (erro) => {
-        Swal.fire('Erro', erro.error.mensagem, 'error');
+        var mensagem: string;
+        if(erro.status == 401){
+          mensagem = "Usuário ou senha inválidos, tente novamente";
+        }else{
+          mensagem = erro.error.mensagem;
+        }
+
+        Swal.fire('Erro', mensagem, 'error');
+        // Swal.fire('Erro', erro.error.mensagem, 'error');
       }
     )
   }
