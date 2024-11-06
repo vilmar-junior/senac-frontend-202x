@@ -23,16 +23,18 @@ export class LoginComponent  {
 
     this.loginService.autenticar(this.dto)
     .subscribe({
-      next: sucesso => {
-          Swal.fire('Sucesso', 'Usu·rio autenticado com sucesso', 'success');
+      next: jwt => {
+          Swal.fire('Sucesso', 'Usu√°rio autenticado com sucesso', 'success');
+          let token: string = jwt.body + "";
+          localStorage.setItem('tokenUsuarioAutenticado', token);
           this.router.navigate(['/home']);
       }, 
       error: erro => {
         var mensagem: string;
         if(erro.status == 401){
-          mensagem = "Usu·rio ou senha inv·lidos, tente novamente";
+          mensagem = "Usu√°rio ou senha inv√°lidos, tente novamente";
         }else{
-          mensagem = erro.error.mensagem;
+          mensagem = erro.error;
         }
 
         Swal.fire('Erro', mensagem, 'error');

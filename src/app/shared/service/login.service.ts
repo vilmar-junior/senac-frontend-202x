@@ -27,7 +27,6 @@ export class LoginService {
   }
   
   sair() {
-    localStorage.removeItem('usuarioAutenticado');
-    //TODO redirecionar para a tela de login
+    localStorage.removeItem('tokenUsuarioAutenticado');
   }
 }

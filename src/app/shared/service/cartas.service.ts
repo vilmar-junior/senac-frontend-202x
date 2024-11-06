@@ -8,11 +8,9 @@ import { CartaSeletor } from '../model/seletor/carta.seletor';
   providedIn: 'root'
 })
 export class CartasService {
-  private readonly API = 'http://localhost:8080/vemnox1/api/carta';
+  private readonly API = 'http://localhost:8080/vemnox1/api/cartas';
   
   constructor(private httpClient: HttpClient) { }
-
-  
 
   salvar(carta: Carta): Observable<any> {
     return this.httpClient.post(this.API, carta);
@@ -31,7 +29,7 @@ export class CartasService {
   }
 
   listarComSeletor(seletor: CartaSeletor): Observable<Array<Carta>> {
-    return this.httpClient.post<Array<Carta>>(this.API + '/filtrar', seletor);
+    return this.httpClient.post<Array<Carta>>(this.API + '/filtro', seletor);
   }
 
   contarTotalRegistros(seletor: CartaSeletor): Observable<number> {

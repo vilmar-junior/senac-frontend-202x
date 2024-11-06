@@ -35,7 +35,7 @@ export class CartaDetalheComponent implements OnInit {
     if (file && file.size <= 10 * 1024 * 1024) { // Limite de 10MB
       this.selectedFile = file;
     } else {
-      alert('Tamanho de arquivo não permitido! Máximo: 10MB.');
+      alert('Tamanho de arquivo nï¿½o permitido! Mï¿½ximo: 10MB.');
       this.selectedFile = null;
     }
   }
@@ -68,7 +68,7 @@ export class CartaDetalheComponent implements OnInit {
         this.voltar();
       },
       (erro) => {
-        Swal.fire('Erro ao salvar a carta: ' + erro.error.mensagem, 'error');
+        Swal.fire('Erro ao salvar a carta: ' + erro.error, 'error');
       }
     );
   }
@@ -80,7 +80,7 @@ export class CartaDetalheComponent implements OnInit {
         this.voltar();
       },
       (erro) => {
-        Swal.fire('Erro ao atualizar a carta: ' + erro.error.mensagem, 'error');
+        Swal.fire('Erro ao atualizar a carta: ' + erro.error, 'error');
       }
     );
   }

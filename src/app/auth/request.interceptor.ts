@@ -1,21 +1,22 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { LoginService } from "../shared/service/login.service";
-import { catchError, Observable, throwError } from "rxjs";
 import { Router } from "@angular/router";
+import { catchError, Observable, throwError } from "rxjs";
+import { LoginService } from "../shared/service/login.service";
 
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {
   constructor(private loginService: LoginService, private router: Router) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const usuarioAutenticado = localStorage.getItem('usuarioAutenticado');
+    const tokenUsuarioAutenticado = localStorage.getItem('tokenUsuarioAutenticado');
     let authReq = req;
 
-   if (usuarioAutenticado) {
-     authReq = req.clone({
-     });
-   }
+    if (tokenUsuarioAutenticado) {
+      authReq = req.clone({
+          setHeaders: { Authorization: `Bearer ${tokenUsuarioAutenticado}` }
+      });
+    } 
 
     return next.handle(authReq).pipe(
       catchError((error: HttpErrorResponse) => {
@@ -28,8 +29,3 @@ export class RequestInterceptor implements HttpInterceptor {
     );
   }
 }
-
-
-
-
-

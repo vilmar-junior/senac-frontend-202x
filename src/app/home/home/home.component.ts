@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Jogador } from './../../shared/model/jogador';
 import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-home',
@@ -15,25 +16,23 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    //TODO ajustar
-    //let usuarioNoStorage = localStorage.getItem('usuarioAutenticado');
+    let token = localStorage.getItem('tokenUsuarioAutenticado');
 
-    // if(usuarioNoStorage){
-    //   //this.jogadorAutenticado = JSON.parse(usuarioNoStorage);
-    //   this.ehAdministrador = this.jogadorAutenticado?.perfil == 'ADMINISTRADOR';
+    if(token){
+      //Converte a String para o formato JSON (declare como any, infelizmente)
+      let tokenJSON: any = jwtDecode(token); 
+      this.ehAdministrador = tokenJSON?.roles == 'ADMINISTRADOR';
 
-    //   if(this.ehAdministrador){
-    //     this.router.navigate(['/home/cartas']);
-      
-    //   }
-    // } else {
-     // console.log("TESTE");
-     // this.router.navigate(['/login']);
-    // }
+      if(this.ehAdministrador){
+        this.router.navigate(['/home/cartas']);
+      }
+    } else {
+     this.router.navigate(['/login']);
+    }
   }
 
   logout(){
-    localStorage.removeItem('usuarioAutenticado');
+    localStorage.removeItem('tokenUsuarioAutenticado');
     this.router.navigate(['/login']);
   }
 }

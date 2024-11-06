@@ -8,6 +8,10 @@ export class CartaSeletor extends BaseSeletor {
     inteligenciaMaxima: number;
     velocidadeMinima: number;
     velocidadeMaxima: number;
+    nomeColecao: string;
+	corColecao: string;
+	dataInicioCadastro: Date;
+	dataFimCadastro: Date;
 }
 
 
