@@ -1,8 +1,8 @@
 <div class="container">
-    <form>
+    <form (submit)="salvar($event)" enctype="multipart/form-data">
         <div class="card">
             <div class="card-header">
-                <h3>{{carta.id ? 'EdiÃ§Ã£o de' : 'Nova'}} Carta</h3>
+                <h3>{{carta.id ? 'Edição de' : 'Nova'}} Carta</h3>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -14,13 +14,13 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-4">
-                        <label for="forca">ForÃ§a</label>
+                        <label for="forca">Força</label>
                         {{carta.forca}}
                         <input type="range" class="form-range" name="forca" 
                                min="1" max="5" [(ngModel)]="carta.forca" required>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="inteligencia">InteligÃªncia:</label>
+                        <label for="inteligencia">Inteligência:</label>
                         {{carta.inteligencia}}
                         <input type="range" class="form-range" name="inteligencia" 
                                min="1" max="5" [(ngModel)]="carta.inteligencia" required>
@@ -33,15 +33,21 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="imagem">Imagem da Carta</label>
+                        <input type="file" class="form-control" accept="image/*" (change)="onFileSelected($event)">
+                    </div>
+                </div>
+                <div class="row">
                     <div class="form-group col-md-6">
                         <label>&nbsp;</label>
-                        <button type="submit" class="form-control btn btn-warning" (click)="voltar()">
+                        <button type="button" class="form-control btn btn-warning" (click)="voltar()">
                             <i class="bi bi-arrow-left"></i> Voltar
                         </button>
                     </div>
                     <div class="form-group col-md-6">
                         <label>&nbsp;</label>
-                        <button type="submit" class="form-control btn btn-primary" (click)="salvar()">
+                        <button type="submit" class="form-control btn btn-primary">
                             <i class="bi bi-check"></i> Salvar
                         </button>
                     </div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-rodape', //Esse atributo que define o nome que ser√° usado na tag para referenciar o componente
+  selector: 'app-rodape', //Esse atributo que define o nome que ser· usado na tag para referenciar o componente
                           //<app-rodape></app-rodape>
   templateUrl: './rodape.component.html',
   styleUrls: ['./rodape.component.scss']

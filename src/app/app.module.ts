@@ -18,7 +18,7 @@ import { RequestInterceptor } from './auth/request.interceptor';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule, // módulo de requisições HTTP
-    FormsModule, // módulo de formulários
+    FormsModule, // módulo de formul�rios
     HomeModule
   ],
   
