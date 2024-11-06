@@ -27,8 +27,8 @@ export class HomeComponent implements OnInit {
       
     //   }
     // } else {
-      console.log("TESTE");
-      this.router.navigate(['/login']);
+     // console.log("TESTE");
+     // this.router.navigate(['/login']);
     // }
   }
 

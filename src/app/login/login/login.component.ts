@@ -20,13 +20,14 @@ export class LoginComponent  {
   }
 
   public realizarLogin() {
+
     this.loginService.autenticar(this.dto)
-    .subscribe(
-      (token: any) => {
-        Swal.fire('Sucesso', 'Usuário autenticado com sucesso', 'success');
-        this.router.navigate(['/home']);
-      },
-      (erro) => {
+    .subscribe({
+      next: sucesso => {
+          Swal.fire('Sucesso', 'Usuário autenticado com sucesso', 'success');
+          this.router.navigate(['/home']);
+      }, 
+      error: erro => {
         var mensagem: string;
         if(erro.status == 401){
           mensagem = "Usuário ou senha inválidos, tente novamente";
@@ -35,13 +36,11 @@ export class LoginComponent  {
         }
 
         Swal.fire('Erro', mensagem, 'error');
-        // Swal.fire('Erro', erro.error.mensagem, 'error');
       }
-    )
+    });
   }
   
   public cadastro() {
-    //TODO desenvolver
     this.router.navigate(['login/cadastro']);
   }
 }
