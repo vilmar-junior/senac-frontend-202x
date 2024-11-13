@@ -1,58 +1,66 @@
 <div class="container">
-    <form (submit)="salvar($event)" enctype="multipart/form-data">
-        <div class="card">
-            <div class="card-header">
+    <form>
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white text-center">
                 <h3>{{carta.id ? 'Edição de' : 'Nova'}} Carta</h3>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <label for="nome">Nome</label>
-                        <input type="text" class="form-control" name="nome" 
-                               [(ngModel)]="carta.nome" required>
+                <!-- Nome da Carta -->
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label for="nome" class="form-label">Nome da Carta</label>
+                        <input type="text" class="form-control" name="nome" [(ngModel)]="carta.nome" required>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="form-group col-md-4">
-                        <label for="forca">Força</label>
-                        {{carta.forca}}
-                        <input type="range" class="form-range" name="forca" 
-                               min="1" max="5" [(ngModel)]="carta.forca" required>
+
+                <!-- Força, Inteligência e Velocidade -->
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label for="forca" class="form-label">Força</label>
+                        <input type="range" class="form-range" name="forca" min="1" max="5" [(ngModel)]="carta.forca" required>
+                        <div class="text-center">{{carta.forca}}</div>
                     </div>
-                    <div class="form-group col-md-4">
-                        <label for="inteligencia">Inteligência:</label>
-                        {{carta.inteligencia}}
-                        <input type="range" class="form-range" name="inteligencia" 
-                               min="1" max="5" [(ngModel)]="carta.inteligencia" required>
+                    <div class="col-md-4">
+                        <label for="inteligencia" class="form-label">Inteligência</label>
+                        <input type="range" class="form-range" name="inteligencia" min="1" max="5" [(ngModel)]="carta.inteligencia" required>
+                        <div class="text-center">{{carta.inteligencia}}</div>
                     </div>
-                    <div class="form-group col-md-4">
-                        <label for="velocidade">Velocidade: </label>
-                        {{carta.velocidade}}
-                        <input type="range" class="form-range" name="velocidade" 
-                               min="1" max="5" [(ngModel)]="carta.velocidade" required>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <label for="imagem">Imagem da Carta</label>
-                        <input type="file" class="form-control" accept="image/*" (change)="onFileSelected($event)">
+                    <div class="col-md-4">
+                        <label for="velocidade" class="form-label">Velocidade</label>
+                        <input type="range" class="form-range" name="velocidade" min="1" max="5" [(ngModel)]="carta.velocidade" required>
+                        <div class="text-center">{{carta.velocidade}}</div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label>&nbsp;</label>
-                        <button type="button" class="form-control btn btn-warning" (click)="voltar()">
-                            <i class="bi bi-arrow-left"></i> Voltar
-                        </button>
+
+                <!-- Imagem da Carta -->
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label for="imagem" class="form-label">Imagem da Carta</label>
+                        <input type="file" class="form-control" (change)="onFileSelected($event)">
                     </div>
-                    <div class="form-group col-md-6">
-                        <label>&nbsp;</label>
-                        <button type="submit" class="form-control btn btn-primary">
-                            <i class="bi bi-check"></i> Salvar
-                        </button>
+                </div>
+
+                <!-- Preview da Imagem com Tamanho Fixo -->
+                <div *ngIf="selectedFile" class="row mb-3">
+                    <div class="col-md-12 text-center">
+                        <label>Pré-visualização da Imagem</label>
+                        <div class="preview-container">
+                            <img [src]="imagePreview" alt="Pré-visualização" class="img-fluid rounded shadow-sm" 
+                                 style="max-width: 200px; max-height: 300px; object-fit: contain;" />
+                        </div>
                     </div>
                 </div>
             </div>    
+
+            <!-- Rodapé com os botões de ação -->
+            <div class="card-footer d-flex justify-content-between">
+                <button type="button" class="btn btn-warning w-45" (click)="voltar()">
+                    <i class="bi bi-arrow-left"></i> Voltar
+                </button>
+                <button type="submit" class="btn btn-primary w-45" (click)="salvar($event)">
+                    <i class="bi bi-check"></i> Salvar
+                </button>
+            </div>
         </div>
     </form>
 </div>

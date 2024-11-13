@@ -16,6 +16,10 @@ export class CartasService {
     return this.httpClient.post(this.API, carta);
   }
 
+  uploadImagem(cartaId: number, formData: FormData): Observable<any> {
+    return this.httpClient.post(`${this.API}/${cartaId}/upload`, formData);
+  }
+
   atualizar(carta: Carta): Observable<any> {
     return this.httpClient.put(this.API, carta);
   }
