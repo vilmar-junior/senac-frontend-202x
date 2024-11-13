@@ -46,7 +46,7 @@ export class CartaListagemComponent implements OnInit {
         this.totalPaginas = resultado;
       },
       erro => {
-        Swal.fire('Erro ao consultar total de p�ginas', erro.error, 'error');
+        Swal.fire('Erro ao consultar total de páginas', erro.error, 'error');
       }
     );
   }
@@ -71,7 +71,7 @@ export class CartaListagemComponent implements OnInit {
     this.pesquisar();
   }
 
-  // Método para criar um array de p�ginas para ser utilizado no ngFor do HTML
+  // Método para criar um array de páginas para ser utilizado no ngFor do HTML
   criarArrayPaginas(): any[] {
     return Array(this.totalPaginas).fill(0).map((x, i) => i + 1);
   }

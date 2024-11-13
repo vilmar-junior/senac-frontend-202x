@@ -35,7 +35,7 @@ export class CartaDetalheComponent implements OnInit {
     if (file && file.size <= 10 * 1024 * 1024) { // Limite de 10MB
       this.selectedFile = file;
     } else {
-      alert('Tamanho de arquivo n�o permitido! M�ximo: 10MB.');
+      alert('Tamanho de arquivo não permitido! Máximo: 10MB.');
       this.selectedFile = null;
     }
   }
