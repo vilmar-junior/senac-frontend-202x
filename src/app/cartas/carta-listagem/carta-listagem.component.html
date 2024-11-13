@@ -96,6 +96,7 @@
             <thead>
                 <tr>
                     <th>Nome</th>
+                    <th>Imagem</th>
                     <th class="text-center">Força</th>
                     <th class="text-center">Velocidade</th>
                     <th class="text-center">Inteligência</th>
@@ -106,6 +107,12 @@
             <tbody>
                 <tr scope="row" *ngFor="let carta of cartas">
                     <td>{{carta.nome}}</td>
+                    <td class="text-center">
+                        <!-- Imagem com clique para exibir no popup -->
+                        <img *ngIf="carta.imagemEmBase64" [src]="'data:image/jpeg;base64,' + carta.imagemEmBase64" alt="Imagem da Carta"
+                             class="img-thumbnail" style="max-width: 50px; max-height: 50px; object-fit: contain; cursor: pointer;"
+                             (click)="exibirImagemGrande(carta.imagemEmBase64)">
+                    </td>
                     <td class="text-center">{{carta.forca}}</td>
                     <td class="text-center">{{carta.velocidade}}</td>
                     <td class="text-center">{{carta.inteligencia}}</td>
@@ -120,14 +127,9 @@
                                 (click)="excluir(carta)">
                             <i class="bi bi-x"></i> Excluir
                         </button>
-                      </td>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
-
-
-
-
-

@@ -118,6 +118,18 @@ export class CartaListagemComponent implements OnInit {
       }
     );
   }
+
+  exibirImagemGrande(imagemBase64: string) {
+    Swal.fire({
+      title: 'Imagem da Carta',
+      html: `<img src="data:image/jpeg;base64,${imagemBase64}" alt="Imagem da Carta" style="max-width: 100%; height: auto;">`,
+      width: '80%',
+      showCloseButton: true,
+      showConfirmButton: false,
+      background: '#fff',
+      padding: '20px'
+    });
+  }
 }
 
 
