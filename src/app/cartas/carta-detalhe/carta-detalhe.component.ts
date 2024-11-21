@@ -13,6 +13,7 @@ export class CartaDetalheComponent implements OnInit {
 
   public carta: Carta = new Carta();
   public selectedFile: File | null = null;
+  public imagePreview: string | ArrayBuffer | null = null; // Para armazenar o preview da imagem
   public idCarta: number;
 
   constructor(private cartaService: CartasService,
@@ -34,9 +35,17 @@ export class CartaDetalheComponent implements OnInit {
     const file: File = event.target.files[0];
     if (file && file.size <= 10 * 1024 * 1024) { // Limite de 10MB
       this.selectedFile = file;
+
+      // Gerar o preview da imagem
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result; // Definir o preview da imagem
+      };
+      reader.readAsDataURL(file);
     } else {
-      alert('Tamanho de arquivo n�o permitido! M�ximo: 10MB.');
+      alert('Tamanho de arquivo não permitido! Máximo: 10MB.');
       this.selectedFile = null;
+      this.imagePreview = null; // Limpar o preview se não for um arquivo válido
     }
   }
 
@@ -61,11 +70,17 @@ export class CartaDetalheComponent implements OnInit {
     }
   }
 
+  // Inserir carta
   inserir(): void {
     this.cartaService.salvar(this.carta).subscribe(
       (resposta) => {
         Swal.fire('Carta salva com sucesso!', '', 'success');
-        this.voltar();
+        // Após salvar a carta, verificamos se há uma imagem para ser enviada
+        if (this.selectedFile) {
+          this.uploadImagem(resposta.id); // Faz o upload da imagem
+        } else {
+          this.voltar(); // Caso não haja imagem, retornamos
+        }
       },
       (erro) => {
         Swal.fire('Erro ao salvar a carta: ' + erro.error, 'error');
@@ -73,16 +88,37 @@ export class CartaDetalheComponent implements OnInit {
     );
   }
 
+  // Atualizar carta
   atualizar(): void {
     this.cartaService.atualizar(this.carta).subscribe(
       (resposta) => {
-        Swal.fire('Carta atualizada  com sucesso!', '', 'success');
-        this.voltar();
+        Swal.fire('Carta atualizada com sucesso!', '', 'success');
+        // Após atualizar a carta, verificamos se há uma imagem para ser enviada
+        if (this.selectedFile) {
+          this.uploadImagem(resposta.id); // Faz o upload da imagem
+        } else {
+          this.voltar(); // Caso não haja imagem, retornamos
+        }
       },
       (erro) => {
         Swal.fire('Erro ao atualizar a carta: ' + erro.error, 'error');
       }
     );
+  }
+
+  uploadImagem(cartaId: number): void {
+    const formData = new FormData();
+    formData.append('imagem', this.selectedFile!, this.selectedFile!.name);
+
+    this.cartaService.uploadImagem(cartaId, formData).subscribe({
+      next: () => {
+        Swal.fire('Imagem carregada com sucesso!', '', 'success');
+        this.voltar();
+      },
+      error: (erro) => {
+        Swal.fire('Erro ao fazer upload da imagem: ' + erro.error, 'error');
+      }
+    });
   }
 
   voltar(): void {
