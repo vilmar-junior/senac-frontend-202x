@@ -1,0 +1,19 @@
+<!-- Mapa ocupando a tela inteira abaixo do header -->
+<div class="map-container">
+    <google-map 
+        [center]="center" 
+        [zoom]="zoom" 
+        height="100%" 
+        width="100%"
+        (mapClick)="onMapClick($event)">
+        <map-marker 
+            [position]="markerPosition" 
+            [label]="'Local'">
+        </map-marker>
+    </google-map>
+  
+    <!-- Botões de Localização fixos sobre o mapa -->
+    <div class="button-container">
+        <button (click)="salvarLocalizacao()" class="btn btn-primary">Salvar Localização Atual</button>
+    </div>
+  </div>

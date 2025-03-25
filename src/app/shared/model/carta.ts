@@ -5,6 +5,7 @@ export class Carta{
     inteligencia: number;
     velocidade: number;
     dataCadastro: Date;
+    imagemEmBase64: string;
 }
 
 

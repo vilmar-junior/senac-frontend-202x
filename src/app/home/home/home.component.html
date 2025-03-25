@@ -32,6 +32,9 @@
                     </ul>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" routerLink="/mapa">Mapa</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" (click)="logout()">Sair</a>
                 </li>
             </ul>
@@ -40,7 +43,7 @@
 </nav>
 
 <div *ngIf="jogadorAutenticado && !ehAdministrador">
-    Ol·, {{jogadorAutenticado?.nome}}
+    Ol√°, {{jogadorAutenticado?.nome}}
 
     <div class="container">
         <div class="row">
@@ -56,5 +59,6 @@
         </div>
     </div>
 </div>
+
 
 <router-outlet></router-outlet>
